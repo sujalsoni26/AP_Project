@@ -22,6 +22,7 @@ public class Stick {
     Timeline timelineStick;
     private Controller controller;
 
+
     public Stick(Controller controller) {
         this.controller = controller;
         this.length = 0;
@@ -39,6 +40,7 @@ public class Stick {
         controller.getButton().setOnMouseReleased(mouseEvent -> {
             System.out.println("Mouse Released");
             timelineStick.stop();
+            horizontalStick();
         });
         controller.getButton().setOnMousePressed(event -> {
             System.out.println("Mouse pressed");
@@ -54,7 +56,11 @@ public class Stick {
     }
 
 
-    public void horizontalStick(){
-
+    private void horizontalStick() {
+        RotateTransition rotateTransition = new RotateTransition(Duration.seconds(1), controller.getStick());
+        rotateTransition.setToAngle(90); // Rotate to 90 degrees (horizontal)
+        rotateTransition.play();
     }
+
+
 }
