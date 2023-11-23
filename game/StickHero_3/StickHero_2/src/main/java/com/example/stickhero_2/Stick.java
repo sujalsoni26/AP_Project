@@ -9,6 +9,8 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
+import javafx.scene.transform.Rotate;
+import javafx.scene.transform.Translate;
 import javafx.util.Duration;
 
 public class Stick {
@@ -47,7 +49,7 @@ public class Stick {
             timelineStick = new Timeline(
                     new KeyFrame(Duration.ZERO, new KeyValue(controller.getStick().scaleYProperty(), controller.getStick().getScaleY())),
                     new KeyFrame(Duration.millis(20), ev -> {
-                        controller.getStick().setScaleY(controller.getStick().getScaleY() + 2);
+                        controller.getStick().setEndY(controller.getStick().getEndY() - 2);
                     })
             );
             timelineStick.setCycleCount(Timeline.INDEFINITE);
@@ -57,9 +59,33 @@ public class Stick {
 
 
     private void horizontalStick() {
-        RotateTransition rotateTransition = new RotateTransition(Duration.seconds(1), controller.getStick());
-        rotateTransition.setToAngle(90); // Rotate to 90 degrees (horizontal)
-        rotateTransition.play();
+
+        double halfHeight = controller.getStick().getBoundsInLocal().getHeight() / 2;
+
+        // Shift the stick's y-axis downward by half its height
+        controller.getStick().setLayoutY(controller.getStick().getLayoutY() + halfHeight);
+
+        // Shift the stick forward by half its height
+        double translationX = halfHeight; // Adjust this value as needed
+        TranslateTransition moveForward = new TranslateTransition(Duration.millis(500), controller.getStick());
+        moveForward.setByX(translationX);
+
+        // Create a rotate transition
+        RotateTransition rotate = new RotateTransition(Duration.millis(500), controller.getStick());
+        rotate.setByAngle(90); // Rotate by 90 degrees
+
+
+        // Play both animations in parallel
+        ParallelTransition parallelTransition = new ParallelTransition(moveForward, rotate);
+        parallelTransition.setCycleCount(1);
+        parallelTransition.play();
+
+
+
+
+
+
+
     }
 
 
