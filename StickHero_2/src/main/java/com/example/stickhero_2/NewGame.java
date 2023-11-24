@@ -1,5 +1,8 @@
 package com.example.stickhero_2;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -10,11 +13,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 
 public class NewGame implements Game {
     static Parent root;
+    Timeline timelineNewGame = new Timeline();
+    Scene scene;
+
 
     @Override
     public void saveGame() {
@@ -22,8 +29,8 @@ public class NewGame implements Game {
     }
 
     @Override
-    public void createHero() {
-        Hero newHero = new Hero("Stickman");
+    public Hero createHero() {
+        return new Hero("Stickman");
     }
 
     public NewGame() {
@@ -79,13 +86,37 @@ public class NewGame implements Game {
     Text newGameText;
 
     public void changeScreenToPlayPage(MouseEvent e) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("running-game-scene.fxml"));
+        //root = FXMLLoader.load(getClass().getResource("running-game-scene.fxml"));
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("running-game-scene.fxml"));
+//        Parent root = loader.load();
+        //YourControllerClass controller = loader.getController();
+//        Controller controller = root.getController();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("running-game-scene.fxml"));
+        Parent root = loader.load();
+
+        // Get the controller instance
+        Controller controller = loader.getController();
+
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
+        scene = new Scene(root);
+        AnchorPane anchorPane = (AnchorPane) scene.lookup("#anchorPane");
         stage.setScene(scene);
 
-        Game newGame = createNewGame();
 
+        Game newGame = createNewGame();
+        Game runningGame = new RunningGame(newGame, createHero());
+        Controller.setHeroReachedonNextPillar(true);
+        timelineNewGame = new Timeline(
+                new KeyFrame(Duration.seconds(2), event -> {
+                    if (Controller.isHeroReachedonNextPillar()) {
+//                    Controller.getController().addPillar(anchorPane);
+                        controller.addPillar(anchorPane);
+                        Controller.setHeroReachedonNextPillar(false);
+                    }
+                })
+        );
+        timelineNewGame.setCycleCount(Timeline.INDEFINITE);
+        timelineNewGame.play();
         stage.show();
     }
 }

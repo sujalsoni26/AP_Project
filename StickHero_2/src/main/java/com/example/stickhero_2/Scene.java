@@ -9,5 +9,5 @@ public class Scene {
     }
 //    Cherries cherry = new Cherries();
 //    Pillar newPillar = new Pillar();
-    Stick stick = new Stick();
+//    Stick stick = new Stick();
 }

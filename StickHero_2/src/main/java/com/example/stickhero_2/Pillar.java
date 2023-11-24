@@ -2,16 +2,19 @@ package com.example.stickhero_2;
 
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 import java.util.Random;
 
 public class Pillar {
-    Timeline timelinePillar;
+    private Timeline timelinePillar;
+    Random random = new Random();
     private int width;
     private Rectangle pillar;
-//    @FXML
-//    private Rectangle firstPillar;
+    static Pillar newPillar = new Pillar();
+
 
     private static int height = 267;
     private int distanceFromPrevious;
@@ -51,15 +54,28 @@ public class Pillar {
         Pillar.totalPillarCrossed = totalPillarCrossed;
     }
 
-    public void generateNextPillar(Stick s1){
-        Random random = new Random();
-        int randomWidth = random.nextInt((200-40) + 1) + 40;
-        System.out.println("Random Number: " + randomWidth);
-        Rectangle pillar = new Rectangle();
-        Pillar newPillar = new Pillar(pillar, randomWidth, 100);
-        pillar.setX(400);
-        pillar.setY(288);
-        s1.anchorPane.getChildren().add(pillar);
+    public Timeline getTimelinePillar() {
+        return timelinePillar;
+    }
 
+
+    public void generateNextPillar(AnchorPane anchorPane){
+
+        if (anchorPane == null){
+            System.out.println("Anchor pane is null");
+        }else {
+            int randomWidth = random.nextInt((200 - 40) + 1) + 40;
+            int randomDistance = random.nextInt((500 - 200) + 1) + 200;
+            System.out.println("Random Width: " + randomWidth);
+            System.out.println("Random Dist: " + randomDistance);
+            Rectangle pillar = new Rectangle();
+            pillar.setFill(Color.BLACK);
+            newPillar = new Pillar(pillar, randomWidth, 100);
+            pillar.setLayoutX(randomDistance);
+            pillar.setLayoutY(291);
+            pillar.toFront();
+            anchorPane.getChildren().add(pillar);
+            pillar.toFront();
+        }
     }
 }

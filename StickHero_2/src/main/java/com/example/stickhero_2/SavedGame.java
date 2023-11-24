@@ -9,8 +9,8 @@ public class SavedGame implements Game{
     }
 
     @Override
-    public void createHero() {
-
+    public Hero createHero() {
+        return new Hero("Stickman");
     }
     private static int[] savedgames = {0, 0};
 

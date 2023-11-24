@@ -18,9 +18,6 @@ public class HelloApplication extends Application {
         Image icon = new Image("file:///C:\\Users\\Sujal Soni\\Desktop\\StickHero\\src\\main\\resources\\Images\\hero.png");
         stage.getIcons().add(icon);
 
-
-
-
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();

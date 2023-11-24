@@ -5,10 +5,11 @@ public class RunningGame extends SavedGame{
 
     private Scene scene;
     private Hero hero;
+    private Game game;
 
-    public RunningGame(Scene scene, Hero hero) {
-        this.scene = scene;
+    public RunningGame(Game game, Hero hero) {
         this.hero = hero;
+        this.game = game;
     }
 
     public void pause(){
