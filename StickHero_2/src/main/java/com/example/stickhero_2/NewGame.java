@@ -20,7 +20,7 @@ import java.io.IOException;
 public class NewGame implements Game {
     static Parent root;
     Timeline timelineNewGame = new Timeline();
-    Scene scene;
+    static Scene scene;
 
 
     @Override
@@ -107,7 +107,7 @@ public class NewGame implements Game {
         Game runningGame = new RunningGame(newGame, createHero());
         Controller.setHeroReachedonNextPillar(true);
         timelineNewGame = new Timeline(
-                new KeyFrame(Duration.seconds(2), event -> {
+                new KeyFrame(Duration.millis(5), event -> {
                     if (Controller.isHeroReachedonNextPillar()) {
 //                    Controller.getController().addPillar(anchorPane);
                         controller.addPillar(anchorPane);

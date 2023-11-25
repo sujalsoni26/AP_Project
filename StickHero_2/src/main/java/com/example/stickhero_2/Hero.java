@@ -1,7 +1,10 @@
 package com.example.stickhero_2;
 
 import javafx.animation.*;
+import javafx.geometry.Bounds;
+import javafx.scene.Node;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
 public class Hero {
@@ -19,6 +22,9 @@ public class Hero {
         this.name = name;
     }
 
+    public Hero(){
+
+    }
     public Timeline getTimelineHero() {
         return timelineHero;
     }
@@ -63,20 +69,36 @@ public class Hero {
         cherries -= n;
     }
 
-    public void moveHero(){
-//        timelineHero = new Timeline(new KeyFrame(Duration.ZERO, new KeyValue(controller.getHero().sc, controller.getStick().getScaleY())),
-//                new KeyFrame(Duration.millis(20), ev -> {
-//                    controller.getStick().setEndY((controller.getStick().getEndY() - 2));
-//                }));
-        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(2), controller.getHero());
-        translateTransition.setToX(200);
-        translateTransition.setAutoReverse(false);
-        translateTransition.play();
+//    public void moveHero(){
+////        timelineHero = new Timeline(new KeyFrame(Duration.ZERO, new KeyValue(controller.getHero().sc, controller.getStick().getScaleY())),
+////                new KeyFrame(Duration.millis(20), ev -> {
+////                    controller.getStick().setEndY((controller.getStick().getEndY() - 2));
+////                }));
+//        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(2), controller.getHero());
+//        translateTransition.setToX(200);
+//        translateTransition.setAutoReverse(false);
+//        translateTransition.play();
+//
+//    }
 
+    public void moveHero(Bounds bound){
+        double length = Controller.getController().calculateLength();
+        Node hero = (Node) NewGame.scene.lookup("#hero");
+//        Node hero = Controller.getController().getHero();
+        TranslateTransition walk = new TranslateTransition();
+        walk.setNode(hero);
+        walk.setByX(length);
+        walk.setDuration(Duration.millis(800));
+        walk.play();
+        walk.setOnFinished(e-> fallHero(hero));
     }
-    public void fallHero(){
-
-
+    public void fallHero(Node hero){
+        TranslateTransition fall = new TranslateTransition();
+//        Node hero = Controller.getController().getHero();
+        fall.setNode(hero);
+        fall.setDuration(Duration.millis(800));
+        fall.setByY(1000);
+        fall.play();
 
     }
 }

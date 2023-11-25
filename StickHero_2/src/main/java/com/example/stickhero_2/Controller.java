@@ -84,7 +84,13 @@ public class Controller {
 ////        h1.moveHero();
 //
 //    }
+    public double calculateLength(){
+        Line stik = (Line) NewGame.scene.lookup("#stick");
+        double length = Math.abs(stik.getEndY() - stik.getStartY());
+        System.out.println(length);
+        return length;
 
+    }
     public void increaseStickLength(){
         s1.increaseLength(button, stick);
     }

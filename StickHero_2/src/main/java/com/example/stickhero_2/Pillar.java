@@ -65,7 +65,7 @@ public class Pillar {
             System.out.println("Anchor pane is null");
         }else {
             int randomWidth = random.nextInt((200 - 40) + 1) + 40;
-            int randomDistance = random.nextInt((500 - 200) + 1) + 200;
+            int randomDistance = random.nextInt((400 - 200) + 1) + 200;
             System.out.println("Random Width: " + randomWidth);
             System.out.println("Random Dist: " + randomDistance);
             Rectangle pillar = new Rectangle();
