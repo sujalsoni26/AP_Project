@@ -7,6 +7,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
+import java.util.ArrayList;
+
 public class Hero {
     private String name;
     private Timeline timelineHero;
@@ -69,19 +71,7 @@ public class Hero {
         cherries -= n;
     }
 
-//    public void moveHero(){
-////        timelineHero = new Timeline(new KeyFrame(Duration.ZERO, new KeyValue(controller.getHero().sc, controller.getStick().getScaleY())),
-////                new KeyFrame(Duration.millis(20), ev -> {
-////                    controller.getStick().setEndY((controller.getStick().getEndY() - 2));
-////                }));
-//        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(2), controller.getHero());
-//        translateTransition.setToX(200);
-//        translateTransition.setAutoReverse(false);
-//        translateTransition.play();
-//
-//    }
-
-    public void moveHero(Bounds bound){
+    public void moveHero(){
         double length = Controller.getController().calculateLength();
         Node hero = (Node) NewGame.scene.lookup("#hero");
 //        Node hero = Controller.getController().getHero();
@@ -90,7 +80,35 @@ public class Hero {
         walk.setByX(length);
         walk.setDuration(Duration.millis(800));
         walk.play();
-        walk.setOnFinished(e-> fallHero(hero));
+
+        walk.setOnFinished(e-> {
+            if (length > Pillar.getPillarArrayList().get(1).getDistanceFromPrevious() && length < Pillar.getPillarArrayList().get(1).getDistanceFromPrevious() + Pillar.getPillarArrayList().get(1).getRectangle().getWidth()){
+                System.out.println("Inside if");
+                Controller.p1.shiftPillar();
+                if (Pillar.isTransitionCompleted()){
+                    Controller.setHeroReachedonNextPillar(true);
+                    Pillar.setTransitionCompleted(false);
+                    Controller.s1.createNewStick();
+                }
+
+            }else {
+                System.out.println("Inside else");
+                ArrayList<Pillar> a = Pillar.getPillarArrayList();
+                for(int i=0;i<Pillar.getPillarArrayList().size();i++){
+                    System.out.println(a.get(i).getDistanceFromPrevious());
+                    System.out.println(a.get(i).getRectangle().getWidth());
+
+                }
+
+//                System.out.println(Pillar.getPillarArrayList().get(1).getDistanceFromPrevious());
+//                System.out.println(Pillar.getPillarArrayList().get(1).getDistanceFromPrevious() + Pillar.getPillarArrayList().get(1).getWidth());
+                Controller.setHeroReachedonNextPillar(false);
+                fallHero(hero);
+                return;
+
+            }
+        });
+
     }
     public void fallHero(Node hero){
         TranslateTransition fall = new TranslateTransition();

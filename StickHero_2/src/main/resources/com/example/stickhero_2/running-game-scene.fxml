@@ -50,7 +50,7 @@
                </image>
             </ImageView>
             <Button fx:id="button" layoutX="-5.0" layoutY="-5.0" mnemonicParsing="false" onMouseClicked="#increaseStickLength" opacity="0.0" prefHeight="565.0" prefWidth="814.0" />
-            <ImageView fitHeight="32.0" fitWidth="41.0" layoutX="24.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="32.0" fitWidth="41.0" layoutX="24.0" layoutY="21.0" onMouseClicked="#openPausepage" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../Images/pause.png" />
                </image>

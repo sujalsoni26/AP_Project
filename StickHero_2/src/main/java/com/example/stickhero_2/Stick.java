@@ -1,26 +1,13 @@
 package com.example.stickhero_2;
 
 import javafx.animation.*;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
 import javafx.util.Duration;
 
 public class Stick {
-//    @FXML
-//    Line stick;
-//    @FXML
-//    Button button;
-//    @FXML
-//    AnchorPane anchorPane;
-//    Controller c1 = new Controller();
     Timeline timelineStick;
-//    private Controller controller;
 
     private boolean stickVertical;
 
@@ -48,32 +35,6 @@ public class Stick {
     }
     boolean isMousePressed = false;
 
-
-//    public void increaseLength(Button button, Line stickk) {
-//
-//        if (button == null){
-//            System.out.println("Button is null");
-//        }else {
-//            button.setOnMousePressed(event -> {
-//                System.out.println("Mouse pressed");
-//                isMousePressed = false;
-//                timelineStick = new Timeline(
-//                        new KeyFrame(Duration.ZERO, new KeyValue(stickk.scaleYProperty(), stickk.getScaleY())),
-//                        new KeyFrame(Duration.millis(20), ev -> {
-//                            stickk.setEndY((stickk.getEndY() - 2));
-//                        })
-//                );
-//                timelineStick.setCycleCount(Timeline.INDEFINITE);
-//                timelineStick.play();
-//            });
-//            button.setOnMouseReleased(mouseEvent -> {
-//                System.out.println("Mouse Released");
-//                isMousePressed = false;
-//                timelineStick.stop();
-//            });
-//        }
-//    }
-
     public void increaseLength(Button button, Line stick) {
         button.setOnMouseReleased(mouseEvent -> {
             System.out.println("Mouse Released");
@@ -85,9 +46,7 @@ public class Stick {
         });
 
        button.setOnMousePressed(event -> {
-            if (!isStickVertical()) {
-                return;
-            }
+
 
             System.out.println("Mouse pressed");
             System.out.println("stickVertical before condition check: " + isStickVertical());
@@ -131,10 +90,26 @@ public class Stick {
         parallelTransition.play();
 
         parallelTransition.setOnFinished(e -> {
-            h.moveHero(stick.getBoundsInLocal());
+            h.moveHero();
         });
 
 
 
+    }
+    public Line createNewStick(){
+        Line stick = new Line();
+        stick.setStartX(141);
+        stick.setEndX(141);
+        stick.setStartY(248);
+        stick.setEndY(248);
+        stick.setLayoutY(42);
+        stick.setLayoutX(20);
+        stick.setStrokeWidth(3);
+
+
+        AnchorPane anchorPane = (AnchorPane) NewGame.scene.lookup("#anchorPane");
+        stick.setId("stick");
+        anchorPane.getChildren().add(stick);
+        return stick;
     }
 }

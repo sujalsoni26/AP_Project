@@ -11,6 +11,8 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Ellipse;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -106,8 +108,13 @@ public class NewGame implements Game {
         Game newGame = createNewGame();
         Game runningGame = new RunningGame(newGame, createHero());
         Controller.setHeroReachedonNextPillar(true);
+
+        Rectangle pill = (Rectangle) NewGame.scene.lookup("#firstPillar");
+        Pillar p1 = new Pillar(pill, 0);
+//        Pillar.getPillarArrayList().add(p1);
+
         timelineNewGame = new Timeline(
-                new KeyFrame(Duration.millis(5), event -> {
+                new KeyFrame(Duration.millis(1000), event -> {
                     if (Controller.isHeroReachedonNextPillar()) {
 //                    Controller.getController().addPillar(anchorPane);
                         controller.addPillar(anchorPane);

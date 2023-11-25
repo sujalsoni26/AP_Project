@@ -2,15 +2,22 @@ package com.example.stickhero_2;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.lang.invoke.MethodHandles;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -27,6 +34,10 @@ public class Controller {
     private Rectangle firstPillar;
     @FXML
     private ImageView hero;
+
+    private Parent root;
+
+
 
     private static boolean heroReachedonNextPillar = false;
 
@@ -69,21 +80,15 @@ public class Controller {
         }
         p1.generateNextPillar(anchorPane);
 
-//        Hero h1 = new Hero("aa");
-//        h1.moveHero();
-
     }
 
-//    public void add_pillar(ActionEvent e){
-//        if (anchorPane == null) {
-//            System.out.println("It is nullllll");
-//        }
-//        p1.generateNextPillar(anchorPane);
-//
-////        Hero h1 = new Hero("aa");
-////        h1.moveHero();
-//
-//    }
+    public void openPausepage(MouseEvent e) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("pause-page.fxml"));
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        javafx.scene.Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
     public double calculateLength(){
         Line stik = (Line) NewGame.scene.lookup("#stick");
         double length = Math.abs(stik.getEndY() - stik.getStartY());
@@ -92,7 +97,8 @@ public class Controller {
 
     }
     public void increaseStickLength(){
-        s1.increaseLength(button, stick);
+        Line stik = (Line) NewGame.scene.lookup("#stick");
+        s1.increaseLength(button, stik);
     }
 
 }
