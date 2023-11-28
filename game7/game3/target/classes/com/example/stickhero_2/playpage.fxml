@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Ellipse?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="555.0" prefWidth="805.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stickhero_2.NewGame">
+   <children>
+      <AnchorPane layoutY="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="551.0" prefWidth="806.0">
+         <children>
+            <ImageView fitHeight="563.0" fitWidth="813.0" layoutX="-4.0" layoutY="-11.0" pickOnBounds="true" smooth="false">
+               <image>
+                  <Image url="@../../../Images/pastel-mountains-vector-art-05xdup4f0zu2tvqa.jpg" />
+               </image>
+               <effect>
+                  <Glow level="0.24" />
+               </effect>
+            </ImageView>
+            <Text fill="#f71313" layoutX="199.0" layoutY="92.0" stroke="#ab2c86" strokeType="OUTSIDE" text="STICK HERO" textAlignment="CENTER" wrappingWidth="458.989013671875">
+               <font>
+                  <Font name="Yu Gothic Medium" size="76.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="68.0" fitWidth="77.0" layoutX="705.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Images/sound.png" />
+               </image>
+            </ImageView>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="267.0" layoutX="335.0" layoutY="285.0" stroke="BLACK" strokeType="INSIDE" width="137.0" />
+            <ImageView fitHeight="57.0" fitWidth="32.0" layoutX="388.0" layoutY="240.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Images/hero.png" />
+               </image>
+            </ImageView>
+            <Ellipse fx:id="newGameEllipse" fill="#f71313" layoutX="170.0" layoutY="293.0" onMouseClicked="#changeScreenToPlayPage" opacity="0.65" radiusX="69.0" radiusY="59.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+               <effect>
+                  <Reflection />
+               </effect>
+            </Ellipse>
+            <Ellipse fx:id="circleLoadGame" fill="#f71313" layoutX="636.0" layoutY="292.0" onMouseClicked="#load" opacity="0.65" radiusX="69.0" radiusY="59.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+               <effect>
+                  <Reflection />
+               </effect>
+            </Ellipse>
+            <Text fx:id="newGameText" fill="WHITE" layoutX="122.0" layoutY="285.0" onMouseClicked="#changeScreenToPlayPage" strokeType="OUTSIDE" strokeWidth="0.0" text="New Game" textAlignment="CENTER" wrappingWidth="96.79998779296875">
+               <font>
+                  <Font name="Yu Gothic UI Semibold" size="29.0" />
+               </font>
+            </Text>
+            <Text fx:id="textLoadGame" fill="WHITE" layoutX="588.0" layoutY="284.0" onMouseClicked="#load" strokeType="OUTSIDE" strokeWidth="0.0" text="Load Game" textAlignment="CENTER" wrappingWidth="96.79998779296875">
+               <font>
+                  <Font name="Yu Gothic UI Semibold" size="29.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
